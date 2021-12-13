@@ -23,7 +23,8 @@
 </p>
 
 ### Made with: [NextJS](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/)
-#### Not sure why I chose NextJS :sweat_smile: Actually I started this project while trying out NextJS. So, I continued it :smile:
+### 🚀 Live App: https://code-n-run.vercel.app
+#### Don't know why I chose NextJS over React :sweat_smile: Actually I started this project while trying out NextJS. So, I continued it :smile:
 
 #### TODO
 - [x] Global Theme
