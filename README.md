@@ -25,6 +25,15 @@
 ### Made with: [NextJS](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/)
 #### Not sure why I chose NextJS :sweat_smile: Actually I started this project while trying out NextJS. So, I continued it :smile:
 
+#### TODO
+- [x] Global Theme
+- [ ] User Authentication
+- [ ] Codeforces Mode
+    - [ ] Embeding Codeforces Page
+    - [ ] Testcases Component
+    - [ ] Replacing Input, Output consoles with Testcases
+- [ ] WebDev Mode
+
 #### To run on local server
 ```bash
 git clone https://github.com/Eessh/code-n-run.git
