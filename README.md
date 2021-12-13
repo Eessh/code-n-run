@@ -26,7 +26,7 @@
 #### Not sure why I chose NextJS :sweat_smile: Actually I started this project while trying out NextJS. So, I continued it :smile:
 
 #### To run on local server
-```
+```bash
 git clone https://github.com/Eessh/code-n-run.git
 cd code-n-run
 npm install
