@@ -27,7 +27,13 @@
 #### Don't know why I chose NextJS over React :sweat_smile: Actually I started this project while trying out NextJS. So, I continued it :smile:
 
 #### TODO
+- [x] Interactive UI Animations
+    - [x] Sidebar Icons
+    - [x] Modals
+    - [x] Output, Error consoles
 - [x] Global Theme
+    - [x] ThemeBoiiContext
+    - [x] Themes
 - [ ] User Authentication
 - [ ] Codeforces Mode
     - [ ] Embeding Codeforces Page
