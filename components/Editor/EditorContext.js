@@ -67,8 +67,8 @@ const useEditorContext = () => {
 
 const initCode = `#include <bits/stdc++.h>
 #define ll long long
-#define l_min LONG_LONG_MIN
-#define l_max LONG_LONG_MAX
+#define llmin LONG_LONG_MIN
+#define llmax LONG_LONG_MAX
 using namespace std;
 
 int main() {
