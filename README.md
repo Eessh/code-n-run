@@ -26,6 +26,12 @@
 ### 🚀 Live App: https://code-n-run.vercel.app
 #### Don't know why I chose NextJS over React :sweat_smile: Actually I started this project while trying out NextJS. So, I continued it :smile:
 
+### Home
+![Home](./screenshots/home.jpeg)
+
+### Settings
+![Settings](./screenshots/settings.jpeg)
+
 #### TODO
 - [x] Interactive UI Animations
     - [x] Sidebar Icons
