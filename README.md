@@ -41,11 +41,6 @@
     - [x] ThemeBoiiContext
     - [x] Themes
 - [ ] User Authentication
-- [ ] Codeforces Mode
-    - [ ] Embeding Codeforces Page
-    - [ ] Testcases Component
-    - [ ] Replacing Input, Output consoles with Testcases
-- [ ] WebDev Mode
 
 #### To run on local server
 ```bash

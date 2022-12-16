@@ -180,6 +180,8 @@ const SideBar = () => {
       {/* <a href="#">
         <Logo />
       </a> */}
+
+      {/* Run */}
       <SidebarIcon
         // onClick={handleRun}
         // onClick={runcode}
@@ -188,6 +190,8 @@ const SideBar = () => {
       >
         <Play />
       </SidebarIcon>
+
+      {/* Settings */}
       <SidebarIcon
         onClick={() => setSettingsVisible(true)}
         hoverStrokeColor={theme.sidebarIcon.settingsIcon.hover.color}
@@ -211,6 +215,8 @@ const SideBar = () => {
           </Modal>
         }
       </AnimatePresence>
+
+      {/* Codeforces Mode
       <SidebarIcon
         onClick={() => setCodeforcesModeVisible(true)}
         hoverStrokeColor={theme.sidebarIcon.settingsIcon.hover.color}
@@ -233,7 +239,7 @@ const SideBar = () => {
             <CodeforcesMode />
           </Modal>
         }
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   )
 }
