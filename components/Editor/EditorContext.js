@@ -7,7 +7,7 @@ const EditorContextProvider = ({ children }) => {
   const [code, setCode] = useState(initCode);
   const [mode, setMode] = useState("text/x-c++src");
   const [theme, setTheme] = useState("material");
-  const [fontSize, setFontSize] = useState("fs1p2");
+  const [fontSize, setFontSize] = useState("fs1p0");
   const [tabSize, setTabSize] = useState(2);
   const [smartIndent, setSmartIndent] = useState(true);
   const [lineNumbersVisible, setLineNumbersVisible] = useState(true);

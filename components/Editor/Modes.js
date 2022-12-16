@@ -1,61 +1,59 @@
 const EditorModes = {
   c: {
-    editorModeName: "text/x-csrc",
     languageName: "C",
+    editorModeName: "text/x-csrc",
+    pistonRuntimeName: "c",
   },
   cpp: {
-    editorModeName: "text/x-c++src",
     languageName: "C++",
+    editorModeName: "text/x-c++src",
+    pistonRuntimeName: "cpp",
+  },
+  java: {
+    languageName: "Java",
+    editorModeName: "text/x-java",
+    pistonRuntimeName: "java",
   },
   python: {
-    editorModeName: "python",
     languageName: "Python",
+    editorModeName: "text/x-python",
+    pistonRuntimeName: "py",
   },
+  rust: {
+    languageName: "Rust",
+    editorModeName: "text/x-rustsrc",
+    pistonRuntimeName: "rs",
+  }
 };
 
 const getLanguageNames = () => {
   let names = [];
-  Object.values(EditorModes).forEach((value) => names.push(value.languageName));
+  Object.values(EditorModes).forEach(({ languageName }) => names.push(languageName));
   return names;
 };
 
 const getLanguageFromEditorMode = (mode) => {
-  switch (mode) {
-    case "text/x-csrc":
-      return "C";
-    case "text/x-c++src":
-      return "C++";
-    case "python":
-      return "Python";
-    default:
-      throw new Error(`${mode} is not supported!!!`);
-  };
+  for (const { editorModeName, languageName } of Object.values(EditorModes)) {
+    if (editorModeName === mode)
+      return languageName;
+  }
+  throw new Error(`Mode: ${mode} is not supported`);
 };
 
 const getEditorModeFromLanguage = (language) => {
-  switch (language) {
-    case "C":
-      return "text/x-csrc";
-    case "C++":
-      return "text/x-c++src";
-    case "Python":
-      return "python";
-    default:
-      throw new Error(`${language} is not supported!!!`);
-  };
+  for (const { editorModeName, languageName } of Object.values(EditorModes)) {
+    if (languageName === language)
+      return editorModeName;
+  }
+  throw new Error(`Language: ${language} is not supported`);
 };
 
 const getAPILanguageFromEditorMode = (mode) => {
-  switch (mode) {
-    case "text/x-csrc":
-      return "c";
-    case "text/x-c++src":
-      return "cpp";
-    case "python":
-      return "py";
-    default:
-      throw new Error(`${mode} is not supported!!!`);
-  };
+  for (const { editorModeName, pistonRuntimeName } of Object.values(EditorModes)) {
+    if (editorModeName === mode)
+      return pistonRuntimeName;
+  }
+  throw new Error(`Mode: ${mode} is not supported!!!`);
 };
 
 export {

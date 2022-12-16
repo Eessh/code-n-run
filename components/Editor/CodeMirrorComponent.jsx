@@ -7,6 +7,7 @@ const CodeMirror = dynamic(() => {
   // Language Support
   import ('codemirror/mode/clike/clike')
   import ('codemirror/mode/python/python')
+  import ('codemirror/mode/rust/rust')
   // Addons
   import ('codemirror/addon/display/autorefresh')
   import ('codemirror/addon/edit/closetag')

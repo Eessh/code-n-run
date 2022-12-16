@@ -19,6 +19,7 @@ const Settings = () => {
 
   const {
     lineNumbersVisible, setLineNumbersVisible,
+    lineWrapping, setLineWrapping,
     autoCloseTags, setAutoCloseTags,
     autoCloseBrackets, setAutoCloseBrackets,
     matchTags, setMatchTags,
@@ -87,6 +88,15 @@ const Settings = () => {
           initialState={lineNumbersVisible}
           offFunc={() => setLineNumbersVisible(false)}
           onFunc={() => setLineNumbersVisible(true)}
+          transitionType="tween"
+        />
+      </div>
+      <div className="flex flex-row justify-between items-center p-1 my-1">
+        <span className="mr-4 text-gray-400 text-xl select-none">Line Wrapping</span>
+        <Toggle
+          initialState={lineWrapping}
+          offFunc={() => setLineWrapping(false)}
+          onFunc={() => setLineWrapping(true)}
           transitionType="tween"
         />
       </div>

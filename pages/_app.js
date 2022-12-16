@@ -7,6 +7,7 @@ import '../styles/Modal.css';
 import '../styles/SplitPane.css';
 import '../styles/Dropdown.css';
 import "../styles/Model.css";
+import "../styles/BaseTextArea.css";
 
 // Theme Support
 import 'codemirror/lib/codemirror.css'

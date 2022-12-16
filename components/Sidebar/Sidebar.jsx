@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useEditorContext } from '../Editor';
 import { useConsoleContext } from '../Console';
@@ -16,37 +17,80 @@ const SideBar = () => {
   } = useEditorContext();
   const { input, setOutput, setErrors } = useConsoleContext();
   const { theme } = useThemeBoiiContext();
+  const [versions, setVersions] = useState({ c: "10.2.0", cpp: "10.2.0", java: "15.0.2", py: "3.10.0", rs: "1.65.0" });
 
-  const runcode = () => {
+  useEffect(() => fetchLanguageRuntimeVersions(), []);
+
+  const fetchLanguageRuntimeVersions = () => {
+    const fetchedVersions = { c: "10.2.0", cpp: "10.2.0", java: "15.0.2", py: "3.10.0", rs: "1.65.0" };
+    const options = {
+      method: "GET",
+      headers: {"Content-Type": "application/json"}
+    };
+    fetch("https://emkc.org/api/v2/piston/runtimes", options)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          result.forEach((runtime) => {
+            if (runtime.language === "c") fetchedVersions.c = runtime.version;
+            if (runtime.language === "c++") fetchedVersions.cpp = runtime.version;
+            if (runtime.language === "java") fetchedVersions.java = runtime.version;
+            if (runtime.language === "python") fetchedVersions.py = runtime.version;
+            if (runtime.language === "rust") fetchedVersions.rs = runtime.version;
+          });
+          setVersions(fetchedVersions);
+        },
+        (error) => {
+          console.log("Error while fetching language runtime versions: ", error);
+        });
+  };
+
+  
+  const runCodeWithPiston = () => {
     setOutput("fetching");
     setErrors("fetching");
     const options = {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        code: code,
-        input: input,
-        language: getAPILanguageFromEditorMode(mode)
-      }),
+        language: getAPILanguageFromEditorMode(mode),
+        version: versions[getAPILanguageFromEditorMode(mode)],
+        files: [
+          {
+            name: "code.cpp",
+            content: code
+          }
+        ],
+        stdin: input,
+        args: [],
+        compile_timeout: 10000,
+        run_timeout: 3000,
+        compile_memory_limit: -1,
+        run_memory_limit: -1,
+      })
     };
-    fetch("https://code-execution-engine.herokuapp.com/run", options)
+    fetch("https://emkc.org/api/v2/piston/execute", options)
       .then(res => res.json())
       .then(
         (result) => {
-          setOutput(result.output.stdout);
-          if (result.output.error === null) {
+          setOutput(result.run.stdout);
+          if (result.run.stderr === "") {
             setErrors("No Errors 😎");
           }
           else {
-            if (result.output.error.signal === "SIGTERM") {
-              setErrors("TLE (Time Limit: 2s) 😕\nCheck for any infinite loops\nOr try some better algorithm 😅");
-            }
-            else if (result.output.error.signal === null) {
-              setErrors("Compilation Error: 😕\n" + result.output.stderr);
-            }
-            else {
-              setErrors("Runtime Error: 🥲\n" + result.output.error.signal);
-            }
+            if (result.run.stderr.search("No such file or directory") !== -1)
+              setErrors("Compilation Error 😕\n");
+            else
+              setErrors(result.run.stderr);
+            // if (result.output.error.signal === "SIGTERM") {
+            //   setErrors("TLE (Time Limit: 2s) 😕\nCheck for any infinite loops\nOr try some better algorithm 😅");
+            // }
+            // else if (result.output.error.signal === null) {
+            //   setErrors("Compilation Error: 😕\n" + result.output.stderr);
+            // }
+            // else {
+            //   setErrors("Runtime Error: 🥲\n" + result.output.error.signal);
+            // }
           }
         },
         (error) => {
@@ -54,6 +98,51 @@ const SideBar = () => {
         });
   }
 
+
+  /**
+   * runCode() will no longer work because, the API stopped working as Heroku removed free tier.
+   */
+  // const runcode = () => {
+  //   setOutput("fetching");
+  //   setErrors("fetching");
+  //   const options = {
+  //     method: "POST",
+  //     headers: {"Content-Type": "application/json"},
+  //     body: JSON.stringify({
+  //       code: code,
+  //       input: input,
+  //       language: getAPILanguageFromEditorMode(mode)
+  //     }),
+  //   };
+  //   fetch("https://code-execution-engine.herokuapp.com/run", options)
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         setOutput(result.output.stdout);
+  //         if (result.output.error === null) {
+  //           setErrors("No Errors 😎");
+  //         }
+  //         else {
+  //           if (result.output.error.signal === "SIGTERM") {
+  //             setErrors("TLE (Time Limit: 2s) 😕\nCheck for any infinite loops\nOr try some better algorithm 😅");
+  //           }
+  //           else if (result.output.error.signal === null) {
+  //             setErrors("Compilation Error: 😕\n" + result.output.stderr);
+  //           }
+  //           else {
+  //             setErrors("Runtime Error: 🥲\n" + result.output.error.signal);
+  //           }
+  //         }
+  //       },
+  //       (error) => {
+  //         console.log("Error while fetching: ", error);
+  //       });
+  // }
+
+
+  /**
+   * handleRun() will no longer work because, the API stopped working.
+   */
   // const handleRun = async (e) => {
   //   e.preventDefault();
   //   fetch("https://edit-and-run.herokuapp.com/execute", {
@@ -93,7 +182,8 @@ const SideBar = () => {
       </a> */}
       <SidebarIcon
         // onClick={handleRun}
-        onClick={runcode}
+        // onClick={runcode}
+        onClick={runCodeWithPiston}
         hoverStrokeColor={theme.sidebarIcon.playIcon.hover.color}
       >
         <Play />
