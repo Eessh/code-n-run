@@ -9,11 +9,11 @@ const EditorModes = {
     editorModeName: "text/x-c++src",
     pistonRuntimeName: "cpp",
   },
-  java: {
-    languageName: "Java",
-    editorModeName: "text/x-java",
-    pistonRuntimeName: "java",
-  },
+  // java: {
+  //   languageName: "Java",
+  //   editorModeName: "text/x-java",
+  //   pistonRuntimeName: "java",
+  // },
   python: {
     languageName: "Python",
     editorModeName: "text/x-python",

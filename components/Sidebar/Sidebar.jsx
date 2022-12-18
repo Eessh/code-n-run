@@ -7,7 +7,7 @@ import { getAPILanguageFromEditorMode } from '../Editor';
 import { Modal, SidebarIcon } from "../AnimatedComponents";
 import { Play, SettingsSVG, CodeforcesSVG } from "../Icons";
 import Settings from '../Settings';
-import CodeforcesMode from '../CodeforcesMode';
+// import CodeforcesMode from '../CodeforcesMode';
 
 const SideBar = () => {
   const {
