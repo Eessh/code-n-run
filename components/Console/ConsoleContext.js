@@ -25,7 +25,7 @@ const ConsoleContextProvider = ({ children }) => {
       .then((res) => { return res.json() })
       .then((body) => {
         if (body.error == null && body.output.slice(0, 12) != "./Playground") {
-          console.log("body: ", body);
+          // console.log("body: ", body);
           setOutput(body.output);
           setErrors("No Errors :)");
         }

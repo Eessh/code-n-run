@@ -32,14 +32,14 @@ const Dropdown = (props) => {
   const [itemsVisible, setItemsVisible] = useState(false);
 
   const handleItemClicked = (index) => {
-    console.log("index: ", index);
+    // console.log("index: ", index);
     setSelectedItem(props.items[index]);
-    console.log("selected item: ", selectedItem);
+    // console.log("selected item: ", selectedItem);
     setItemsVisible(false);
     props.getSelectedItem(index);
   }
 
-  console.log("selected: ", selectedItem, props.items);
+  // console.log("selected: ", selectedItem, props.items);
 
   return (
     <div className="Dropdown relative inline-block text-left ml-10">

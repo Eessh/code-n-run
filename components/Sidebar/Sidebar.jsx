@@ -3,9 +3,9 @@ import { AnimatePresence } from 'framer-motion';
 import { useEditorContext } from '../Editor';
 import { useConsoleContext } from '../Console';
 import { useThemeBoiiContext } from '../ThemeBoii';
-import { getAPILanguageFromEditorMode } from '../Editor';
+import { getAPILanguageFromEditorMode, getRapidApiLanguageChoiceFromEditorMode } from '../Editor';
 import { Modal, SidebarIcon } from "../AnimatedComponents";
-import { Play, SettingsSVG, CodeforcesSVG } from "../Icons";
+import { Play, SettingsSVG, CodeforcesSVG, Github } from "../Icons";
 import Settings from '../Settings';
 // import CodeforcesMode from '../CodeforcesMode';
 
@@ -13,7 +13,7 @@ const SideBar = () => {
   const {
     code, mode,
     settingsVisible, setSettingsVisible,
-    codeforcesModeVisible, setCodeforcesModeVisible
+    // codeforcesModeVisible, setCodeforcesModeVisible
   } = useEditorContext();
   const { input, setOutput, setErrors } = useConsoleContext();
   const { theme } = useThemeBoiiContext();
@@ -135,9 +135,47 @@ const SideBar = () => {
   //         }
   //       },
   //       (error) => {
+  //         setOutput("");
+  //         setErrors("Code Execution API error or maybe network error 😕");
   //         console.log("Error while fetching: ", error);
   //       });
   // }
+
+  const runCodeUsingRapidAPI = () => {
+    setOutput("fetching");
+    setErrors("fetching");
+    fetch("https://code-compiler.p.rapidapi.com/v2", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'x-rapidapi-host': 'code-compiler.p.rapidapi.com',
+        'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_KEY
+      },
+      body: new URLSearchParams({
+        'LanguageChoice': getRapidApiLanguageChoiceFromEditorMode(mode),
+        'Program': code,
+        'Input': input
+      }).toString()
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          if (result.Errors === null) {
+            setOutput(result.Result);
+            setErrors("No Errors 😎");
+          }
+          else {
+            setOutput("");
+            setErrors(result.Errors);
+          }
+        },
+        (error) => {
+          setOutput("");
+          setErrors("Code Execution API error or maybe network error 😕");
+          console.log("Error while fetching: ", error);
+        }
+      );
+  };
 
 
   /**
@@ -185,7 +223,8 @@ const SideBar = () => {
       <SidebarIcon
         // onClick={handleRun}
         // onClick={runcode}
-        onClick={runCodeWithPiston}
+        // onClick={runCodeWithPiston}
+        onClick={runCodeUsingRapidAPI}
         hoverStrokeColor={theme.sidebarIcon.playIcon.hover.color}
       >
         <Play />
@@ -215,6 +254,14 @@ const SideBar = () => {
           </Modal>
         }
       </AnimatePresence>
+
+      {/* Github */}
+      <SidebarIcon
+        onClick={() => window.open("https://github.com/Eessh/code-n-run", "_blank")}
+        hoverStrokeColor={theme.sidebarIcon.playIcon.hover.color}
+      >
+        <Github />
+      </SidebarIcon>
 
       {/* Codeforces Mode
       <SidebarIcon

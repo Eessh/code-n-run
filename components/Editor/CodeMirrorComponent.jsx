@@ -6,8 +6,10 @@ const CodeMirror = dynamic(() => {
   // import CodeMirror from 'react-codemirror';
   // Language Support
   import ('codemirror/mode/clike/clike')
-  import ('codemirror/mode/python/python')
   import ('codemirror/mode/rust/rust')
+  import ('codemirror/mode/javascript/javascript')
+  import ('codemirror/mode/python/python')
+  import ('codemirror/mode/go/go')
   // Addons
   import ('codemirror/addon/display/autorefresh')
   import ('codemirror/addon/edit/closetag')

@@ -1,6 +1,7 @@
 import ChevronDown from "./ChevronDown";
 import Close from "./Close";
 import CodeforcesSVG from "./CodeforcesSVG";
+import Github from "./Github";
 import Home from "./Home";
 import Notifications from "./Notifications";
 import People from "./People";
@@ -15,6 +16,7 @@ export {
   ChevronDown,
   Close,
   CodeforcesSVG,
+  Github,
   Home,
   Notifications,
   People,

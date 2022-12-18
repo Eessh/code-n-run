@@ -10,7 +10,8 @@ import {
   getLanguageNames,
   getLanguageFromEditorMode,
   getEditorModeFromLanguage,
-  getAPILanguageFromEditorMode
+  getAPILanguageFromEditorMode,
+  getRapidApiLanguageChoiceFromEditorMode
 } from "./Modes";
 import KeyBindings from "./Shortcuts";
 
@@ -25,5 +26,6 @@ export {
   getLanguageFromEditorMode,
   getEditorModeFromLanguage,
   getAPILanguageFromEditorMode,
+  getRapidApiLanguageChoiceFromEditorMode,
   KeyBindings
 };
