@@ -1,27 +1,33 @@
+import DefaultCodes from "./DefaultCodes";
+
 const EditorModes = {
   c: {
     languageName: "C",
     editorModeName: "text/x-csrc",
     pistonRuntimeName: "c",
     rapidAPILanguageChoice: 6,
+    defaultCode: DefaultCodes.c,
   },
   cpp: {
     languageName: "C++",
     editorModeName: "text/x-c++src",
     pistonRuntimeName: "cpp",
     rapidAPILanguageChoice: 7,
+    defaultCode: DefaultCodes.cpp,
   },
   rust: {
     languageName: "Rust",
     editorModeName: "text/x-rustsrc",
     pistonRuntimeName: "rs",
     rapidAPILanguageChoice: 46,
+    defaultCode: DefaultCodes.rust,
   },
   javascript: {
     languageName: "Javascript",
     editorModeName: "text/javascript",
     pistonRuntimeName: "js",
     rapidAPILanguageChoice: 17,
+    defaultCode: DefaultCodes.javascript,
   },
   // typescript: {
   //   language: "Typescript",
@@ -34,12 +40,14 @@ const EditorModes = {
     editorModeName: "text/x-python",
     pistonRuntimeName: "py",
     rapidAPILanguageChoice: 5,
+    defaultCode: DefaultCodes.python,
   },
   go: {
     languageName: "Go",
     editorModeName: "text/x-go",
     pistonRuntimeName: "go",
     rapidAPILanguageChoice: 20,
+    defaultCode: DefaultCodes.go,
   },
   // java: {
   //   languageName: "Java",
@@ -84,7 +92,15 @@ const getRapidApiLanguageChoiceFromEditorMode = (mode) => {
     if (editorModeName === mode)
       return rapidAPILanguageChoice;
   }
-  throw new Error(`Mode: ${mode} is node supported!!!`);
+  throw new Error(`Mode: ${mode} is not supported!!!`);
+};
+
+const getDefaultCodeFromEditorMode = (mode) => {
+  for (const { editorModeName, defaultCode } of Object.values(EditorModes)) {
+    if (editorModeName === mode)
+      return defaultCode;
+  }
+  throw new Error(`Mode: ${mode} is not supported!!!`);
 };
 
 export {
@@ -93,5 +109,6 @@ export {
   getLanguageFromEditorMode,
   getEditorModeFromLanguage,
   getAPILanguageFromEditorMode,
-  getRapidApiLanguageChoiceFromEditorMode
+  getRapidApiLanguageChoiceFromEditorMode,
+  getDefaultCodeFromEditorMode
 };

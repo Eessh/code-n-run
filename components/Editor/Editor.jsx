@@ -1,8 +1,11 @@
+import { StrictMode } from 'react';
 import CodeMirrorComponent from './CodeMirrorComponent.jsx';
 
 const Editor = () => {
   return (
-    <CodeMirrorComponent />
+    <StrictMode>
+      <CodeMirrorComponent />
+    </StrictMode>
   );
 };
 

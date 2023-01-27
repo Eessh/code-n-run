@@ -12,7 +12,8 @@ import {
   useEditorContext,
   getLanguageNames,
   getLanguageFromEditorMode,
-  getEditorModeFromLanguage
+  getEditorModeFromLanguage,
+  getDefaultCodeFromEditorMode
 } from "../Editor";
 
 const Settings = () => {
@@ -27,15 +28,20 @@ const Settings = () => {
     mode, setMode,
     scrollPastEnd, setScrollPastEnd,
     setSettingsVisible,
+    setCode
   } = useEditorContext();
   const {theme, setTheme} = useThemeBoiiContext();
 
-  const getSelectedItem = (index) => {
+  const getSelectedTheme = (index) => {
     setTheme(getThemeByName(getEditorThemeNames()[index]));
   }
 
   const getSelectedLanguage = (index) => {
-    setMode(getEditorModeFromLanguage(getLanguageNames()[index]));
+    setMode(() => {
+      const newMode = getEditorModeFromLanguage(getLanguageNames()[index]);
+      setCode(getDefaultCodeFromEditorMode(newMode));
+      return newMode;
+    });
   }
 
   return (
@@ -75,7 +81,7 @@ const Settings = () => {
         <Dropdown
           items={getThemeNames()}
           defaultItem={theme.name}
-          getSelectedItem={getSelectedItem}
+          getSelectedItem={getSelectedTheme}
         />
       </div>
       <div className="flex flex-row justify-between items-center p-1">

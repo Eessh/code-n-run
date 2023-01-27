@@ -156,6 +156,11 @@ const SideBar = () => {
         'Program': code,
         'Input': input
       }).toString()
+      // body: JSON.stringify({
+      //   LanguageChoice: getRapidApiLanguageChoiceFromEditorMode(mode),
+      //   Program: code,
+      //   Input: input
+      // })
     })
       .then(res => res.json())
       .then(
@@ -223,8 +228,8 @@ const SideBar = () => {
       <SidebarIcon
         // onClick={handleRun}
         // onClick={runcode}
-        // onClick={runCodeWithPiston}
-        onClick={runCodeUsingRapidAPI}
+        onClick={runCodeWithPiston}
+        // onClick={runCodeUsingRapidAPI}
         hoverStrokeColor={theme.sidebarIcon.playIcon.hover.color}
       >
         <Play />

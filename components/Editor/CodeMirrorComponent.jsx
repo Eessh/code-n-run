@@ -36,7 +36,6 @@ const CodeMirrorComponent = () => {
   const {
     code, setCode,
     mode,
-    // theme,
     fontSize,
     tabSize,
     smartIndent,
@@ -50,7 +49,7 @@ const CodeMirrorComponent = () => {
     keymap
   } = useEditorContext();
   const { theme } = useThemeBoiiContext();
-
+  
   return (
     CodeMirror && <div className="flex-1 CodeMirrorComponent">
       <CodeMirror

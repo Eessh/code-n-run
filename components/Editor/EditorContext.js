@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from 'react';
+import DefaultCodes from './DefaultCodes';
 
 const EditorContext = createContext(null);
 
 const EditorContextProvider = ({ children }) => {
 
-  const [code, setCode] = useState(initCode);
+  const [code, setCode] = useState(DefaultCodes.cpp);
   const [mode, setMode] = useState("text/x-c++src");
   const [theme, setTheme] = useState("material");
   const [fontSize, setFontSize] = useState("fs1p0");
@@ -65,21 +66,8 @@ const useEditorContext = () => {
   return context;
 }
 
-const initCode = `#include <bits/stdc++.h>
-#define ll long long
-#define llmin LONG_LONG_MIN
-#define llmax LONG_LONG_MAX
-using namespace std;
-
-int main() {
-  cout << "Hi, I'm Eessh 😉" << endl;
-  return 0;
-}
-`;
-
 export {
   EditorContextProvider,
   EditorContextConsumer,
   useEditorContext,
-  initCode
 };
