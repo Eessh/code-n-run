@@ -37,11 +37,9 @@ const Settings = () => {
   }
 
   const getSelectedLanguage = (index) => {
-    setMode(() => {
-      const newMode = getEditorModeFromLanguage(getLanguageNames()[index]);
-      setCode(getDefaultCodeFromEditorMode(newMode));
-      return newMode;
-    });
+    const newMode = getEditorModeFromLanguage(getLanguageNames()[index]);
+    setCode(getDefaultCodeFromEditorMode(newMode));
+    setMode(newMode);
   }
 
   return (

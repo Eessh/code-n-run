@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   AyuMirage,
   Dracula,
@@ -65,7 +65,20 @@ const getThemeByName = (themeName) => {
 
 const ThemeBoiiContextProvider = ({children}) => {
   const [theme, setTheme] = useState(defaultTheme);
-  const value = {theme, setTheme};
+
+  useEffect(() => {
+    const themeJson = localStorage.getItem("theme");
+    if (themeJson != null) {
+      setTheme(JSON.parse(themeJson));
+    }
+  }, []);
+
+  const setThemeWrapper = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", JSON.stringify(newTheme));
+  };
+
+  const value = {theme, setTheme: setThemeWrapper};
 
   return (
     <ThemeBoiiContext.Provider value={value}>

@@ -57,7 +57,7 @@ const SideBar = () => {
         version: versions[getAPILanguageFromEditorMode(mode)],
         files: [
           {
-            name: "code.cpp",
+            name: "code",
             content: code
           }
         ],
