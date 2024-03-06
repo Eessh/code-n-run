@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import DefaultCodes from './DefaultCodes';
 
 const EditorContext = createContext(null);
@@ -23,9 +23,31 @@ const EditorContextProvider = ({ children }) => {
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [codeforcesModeVisible, setCodeforcesModeVisible] = useState(false);
 
+  useEffect(() => {
+    const localCode = localStorage.getItem("code");
+    if (localCode != null) {
+      setCode(localCode);
+    }
+
+    const localMode = localStorage.getItem("mode");
+    if (localMode != null) {
+      setMode(localMode);
+    }
+  }, []);
+
+  const setCodeWrapper = (newCode) => {
+    setCode(newCode);
+    localStorage.setItem("code", newCode);
+  };
+
+  const setModeWrapper = (newMode) => {
+    setMode(newMode);
+    localStorage.setItem("mode", newMode);
+  };
+
   const value = {
-    code, setCode,
-    mode, setMode,
+    code, setCode: setCodeWrapper,
+    mode, setMode: setModeWrapper,
     theme, setTheme,
     fontSize, setFontSize,
     tabSize, setTabSize,
